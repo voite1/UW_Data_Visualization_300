@@ -1,1 +1,1 @@
-"# UW_Data_Visualization_300" 
+# UW Data Visualization 300
