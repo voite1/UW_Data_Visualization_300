@@ -6,3 +6,5 @@ Seattle Permits Database: https://data.seattle.gov/Permitting/Building-Permits-C
 Seattle Crimes: https://data.seattle.gov/Public-Safety/Seattle-Crime-Stats-by-Police-Precinct-2008-Presen/3xqu-vnum
 Seattle Poice Precinct locations: https://data.seattle.gov/Land-Base/Police-Beat-and-Precinct-Centerpoints/4khs-fz35
 
+Zillow Monthly Price Per Zip Code: http://www.zillow.com/research/data/
+
