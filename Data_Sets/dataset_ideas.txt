@@ -8,3 +8,7 @@ Seattle Poice Precinct locations: https://data.seattle.gov/Land-Base/Police-Beat
 
 Zillow Monthly Price Per Zip Code: http://www.zillow.com/research/data/
 
+
+
+EXCELLLENT ONE: https://sqlbelle.com/2015/01/16/data-sets-for-bianalyticsvisualization-projects/
+
