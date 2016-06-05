@@ -566,6 +566,9 @@
       <aliases enabled='yes' />
       <column datatype='string' hidden='true' name='[Beat (Seattle!Police!Department!Polic)]' role='dimension' type='nominal' />
       <column datatype='string' name='[Beat]' role='dimension' type='nominal' />
+      <column caption='Incident Count' datatype='integer' name='[Calculation_69805816743297024]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='countd([General Offense Number])' />
+      </column>
       <column datatype='string' name='[City]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
       <column datatype='datetime' name='[Date Reported]' role='dimension' type='ordinal' />
       <column caption='District' datatype='string' name='[District/Sector]' role='dimension' type='nominal' />
@@ -1842,6 +1845,7 @@
         <field-sort-custom-order field='Zip' />
         <field-sort-custom-order field='RMS CDW ID' />
         <field-sort-custom-order field='General Offense Number' />
+        <field-sort-custom-order field='Calculation_69805816743297024' />
         <field-sort-custom-order field='Offense Type' />
         <field-sort-custom-order field='Summarized Offense Description' />
         <field-sort-custom-order field='Date Reported' />
@@ -1868,9 +1872,11 @@
         <column datatype='string' name='[Beat]' role='dimension' type='nominal' />
         <column caption='District' datatype='string' name='[District/Sector]' role='dimension' type='nominal' />
         <column caption='Offense' datatype='string' name='[Offense Type]' role='dimension' type='nominal' />
+        <column datatype='string' name='[Precinct]' role='dimension' type='nominal' />
         <column-instance column='[Beat]' derivation='None' name='[none:Beat:nk]' pivot='key' type='nominal' />
         <column-instance column='[District/Sector]' derivation='None' name='[none:District/Sector:nk]' pivot='key' type='nominal' />
         <column-instance column='[Offense Type]' derivation='None' name='[none:Offense Type:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Precinct]' derivation='None' name='[none:Precinct:nk]' pivot='key' type='nominal' />
       </datasource-dependencies>
       <filter class='categorical' column='[federated.14geqy01f02adq18hm6hu132j4fb].[none:Beat:nk]' targetField='[federated.14geqy01f02adq18hm6hu132j4fb].[none:Beat:nk]'>
         <groupfilter function='level-members' level='[none:Beat:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
@@ -1880,6 +1886,9 @@
       </filter>
       <filter class='categorical' column='[federated.14geqy01f02adq18hm6hu132j4fb].[none:Offense Type:nk]' targetField='[federated.14geqy01f02adq18hm6hu132j4fb].[none:Offense Type:nk]'>
         <groupfilter function='level-members' level='[none:Offense Type:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+      </filter>
+      <filter class='categorical' column='[federated.14geqy01f02adq18hm6hu132j4fb].[none:Precinct:nk]' targetField='[federated.14geqy01f02adq18hm6hu132j4fb].[none:Precinct:nk]'>
+        <groupfilter function='level-members' level='[none:Precinct:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
       </filter>
     </shared-view>
   </shared-views>
@@ -1991,9 +2000,6 @@
           <filter class='categorical' column='[federated.14geqy01f02adq18hm6hu132j4fb].[mn:Date Reported:ok]'>
             <groupfilter from='1' function='range' level='[mn:Date Reported:ok]' to='12' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
-          <filter class='categorical' column='[federated.14geqy01f02adq18hm6hu132j4fb].[none:Precinct:nk]' filter-group='5'>
-            <groupfilter function='level-members' level='[none:Precinct:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
-          </filter>
           <filter class='categorical' column='[federated.14geqy01f02adq18hm6hu132j4fb].[none:Summarized Offense Description:nk]' filter-group='4'>
             <groupfilter function='level-members' level='[none:Summarized Offense Description:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
@@ -2104,6 +2110,77 @@
         <cols>[federated.14geqy01f02adq18hm6hu132j4fb].[none:Longitude (Seattle!Police!Department!Polic):qk]</cols>
       </table>
     </worksheet>
+    <worksheet name='Row Count'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Police_Beat_Location+ (Multiple Connections)' name='federated.14geqy01f02adq18hm6hu132j4fb' />
+          </datasources>
+          <datasource-dependencies datasource='federated.14geqy01f02adq18hm6hu132j4fb'>
+            <column datatype='string' name='[Beat]' role='dimension' type='nominal' />
+            <column caption='Incident Count' datatype='integer' name='[Calculation_69805816743297024]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='countd([General Offense Number])' />
+            </column>
+            <column caption='District' datatype='string' name='[District/Sector]' role='dimension' type='nominal' />
+            <column caption='Offense Number' datatype='integer' name='[General Offense Number]' role='measure' type='ordinal' />
+            <column caption='Offense' datatype='string' name='[Offense Type]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Precinct]' role='dimension' type='nominal' />
+            <column-instance column='[Beat]' derivation='None' name='[none:Beat:nk]' pivot='key' type='nominal' />
+            <column-instance column='[District/Sector]' derivation='None' name='[none:District/Sector:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Offense Type]' derivation='None' name='[none:Offense Type:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Precinct]' derivation='None' name='[none:Precinct:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_69805816743297024]' derivation='User' name='[usr:Calculation_69805816743297024:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <slices>
+            <column>[federated.14geqy01f02adq18hm6hu132j4fb].[none:Beat:nk]</column>
+            <column>[federated.14geqy01f02adq18hm6hu132j4fb].[none:District/Sector:nk]</column>
+            <column>[federated.14geqy01f02adq18hm6hu132j4fb].[none:Offense Type:nk]</column>
+            <column>[federated.14geqy01f02adq18hm6hu132j4fb].[none:Precinct:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='color' value='#898989' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='border-style' data-class='subtotal' scope='rows' value='none' />
+            <format attr='border-style' data-class='subtotal' scope='cols' value='none' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='border-style' data-class='subtotal' scope='rows' value='none' />
+            <format attr='border-style' data-class='subtotal' scope='cols' value='none' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='font-size' value='26' />
+            <format attr='font-weight' value='bold' />
+            <format attr='color' value='#b40f1e' />
+          </style-rule>
+          <style-rule element='table-div'>
+            <format attr='line-pattern' scope='rows' value='none' />
+            <format attr='line-pattern' scope='cols' value='none' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.14geqy01f02adq18hm6hu132j4fb].[usr:Calculation_69805816743297024:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+    </worksheet>
     <worksheet name='Tabular Data'>
       <table>
         <view>
@@ -2173,9 +2250,6 @@
           </filter>
           <filter class='categorical' column='[federated.14geqy01f02adq18hm6hu132j4fb].[attr:Precinct:nk]' filter-group='3'>
             <groupfilter function='level-members' level='[attr:Precinct:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
-          </filter>
-          <filter class='categorical' column='[federated.14geqy01f02adq18hm6hu132j4fb].[none:Precinct:nk]' filter-group='5'>
-            <groupfilter function='level-members' level='[none:Precinct:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
           <filter class='categorical' column='[federated.14geqy01f02adq18hm6hu132j4fb].[none:Summarized Offense Description:nk]' filter-group='4'>
             <groupfilter function='level-members' level='[none:Summarized Offense Description:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
@@ -2271,7 +2345,6 @@
         <zone h='100000' id='9' type='layout-basic' w='100000' x='0' y='0'>
           <zone h='100000' id='12' param='vert' type='layout-flow' w='100000' x='0' y='0'>
             <zone h='6668' id='11' type='title' w='100000' x='0' y='0' />
-            <zone h='92665' id='10' type='layout-basic' w='100000' x='0' y='6668' />
           </zone>
         </zone>
         <zone h='55333' id='1' name='Crimes by Beat' w='68875' x='625' y='7667' />
@@ -2282,6 +2355,7 @@
         <zone h='5167' id='17' mode='checkdropdown' name='Crimes by Beat' param='[federated.14geqy01f02adq18hm6hu132j4fb].[none:Summarized Offense Description:nk]' type='filter' values='relevant' w='30000' x='70000' y='51167' />
         <zone h='5667' id='18' mode='checkdropdown' name='Crimes by Beat' param='[federated.14geqy01f02adq18hm6hu132j4fb].[none:Zip:ok]' type='filter' values='relevant' w='29750' x='70250' y='57667' />
         <zone h='5667' id='19' mode='checkdropdown' name='Crimes by Beat' param='[federated.14geqy01f02adq18hm6hu132j4fb].[none:Precinct:nk]' type='filter' values='relevant' w='30125' x='69875' y='24833' />
+        <zone h='7000' id='20' name='Row Count' w='17750' x='76500' y='12500' />
       </zones>
     </dashboard>
   </dashboards>
@@ -2377,6 +2451,25 @@
         </highlight>
       </viewpoint>
     </window>
+    <window class='worksheet' name='Row Count'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
     <window class='dashboard' maximized='true' name='Seattle Crimes 2014 - 2015'>
       <viewpoints>
         <viewpoint name='Crimes by Beat'>
@@ -2387,7 +2480,10 @@
             </color-one-way>
           </highlight>
         </viewpoint>
-        <viewpoint name='Tabular Data' />
+        <viewpoint name='Row Count' />
+        <viewpoint name='Tabular Data'>
+          <zoom type='fit-width' />
+        </viewpoint>
       </viewpoints>
       <active id='-1' />
     </window>
@@ -3570,6 +3666,61 @@
       wa25NNFUnMLZOdmoTSYexL36lwhah5EWw2mpeIIx9nZekEzGSSc0dANu3rqN333EaXXC5t1V
       avKUgCLxZ0sxRu1vQmEsAbc/Tmg0IDI3z6QpoCEj9ipohsDyQoq+JuHyhFhImoxqXZbn5jC0
       ERPbQ8xpE11dIF8b4VfMax/gmreb/x+4hS8x1to6+QAAAABJRU5ErkJggg==
+    </thumbnail>
+    <thumbnail height='84' name='Row Count' width='192'>
+      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
+      AElFTkSuQmCC
     </thumbnail>
     <thumbnail height='192' name='Seattle Crimes 2014 - 2015' width='192'>
       iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAA7EAAAOxAGVKw4b
